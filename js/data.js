@@ -2,47 +2,120 @@
 // Orden de carga: 1) lo guardado desde el panel en este navegador,
 // 2) data/tiendas.json (lo que publica el sitio), 3) la lista de ejemplo de abajo.
 
-export const STORAGE_KEY = 'sanjose-mall:tiendas:v1';
+export const STORAGE_KEY = 'sanjose-mall:tiendas:v2';
 
-const logo = (seed) => `https://picsum.photos/seed/${seed}/400/400`;
+const img = (seed, w = 400, h = 400) => `https://picsum.photos/seed/${seed}/${w}/${h}`;
+const prods = (id, items) => items.map(([nombre, precio], i) => ({ imagen: img(`${id}-p${i + 1}`, 500, 500), nombre, precio }));
 
 export const CATEGORIAS = [
   'Alimentos y bebidas', 'Moda', 'Tecnología', 'Hogar y jardín', 'Servicios', 'Turismo',
   'Salud y belleza', 'Artesanía', 'Arte y diseño', 'Mascotas', 'Educación', 'Deportes',
 ];
 
+/* ---------- Distribución del edificio ----------
+   3 pisos alrededor del patio central. Cada piso tiene 13 locales:
+   5 a la izquierda, 5 a la derecha (se van alternando) y 3 al fondo. */
+export const PISOS = 3;
+export const LOCALES_POR_PISO = 13;
+
+export function slotInfo(slot) {
+  if (slot < 10) return { lado: slot % 2 === 0 ? 'izquierda' : 'derecha', k: Math.floor(slot / 2) };
+  return { lado: 'fondo', k: slot - 10 };
+}
+
+/** Ubica cada tienda en un piso y un local. Respeta el piso pedido; si está lleno, usa el siguiente con espacio. */
+export function assignSlots(list) {
+  const used = Array.from({ length: PISOS }, () => 0);
+  return list.map((store) => {
+    let want = Math.min(PISOS, Math.max(1, parseInt(store.piso, 10) || 1)) - 1;
+    let piso = want;
+    for (let t = 0; t < PISOS && used[piso] >= LOCALES_POR_PISO; t++) piso = (piso + 1) % PISOS;
+    if (used[piso] >= LOCALES_POR_PISO) return { store, piso: -1, slot: -1, local: '', lleno: true };
+    const slot = used[piso]++;
+    return { store, piso: piso + 1, slot, local: String((piso + 1) * 100 + slot + 1), movido: piso !== want, ...slotInfo(slot) };
+  });
+}
+
 export const DEMO_STORES = [
-  { id: 'cafe-aroma', nombre: 'Café Aroma', categoria: 'Alimentos y bebidas', local: '101', color: '#7a4b2a',
-    logo: logo('cafe-aroma'), whatsapp: '+506 8800 1101', web: 'https://es.wikipedia.org/wiki/Caf%C3%A9',
-    video: 'https://www.youtube.com/watch?v=jfKfPfyJRdk' },
-  { id: 'tico-tours', nombre: 'Tico Tours', categoria: 'Turismo', local: '102', color: '#1f7a5a',
-    logo: logo('tico-tours'), whatsapp: '+506 8800 1102', web: 'https://es.wikipedia.org/wiki/Costa_Rica',
-    video: 'https://www.youtube.com/watch?v=LXb3EKWsInQ' },
-  { id: 'pixel-studio', nombre: 'Pixel Studio', categoria: 'Tecnología', local: '103', color: '#5b3fd1',
-    logo: logo('pixel-studio'), whatsapp: '+506 8800 1103', web: 'https://es.wikipedia.org/wiki/Animaci%C3%B3n',
-    video: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ' },
-  { id: 'moda-luna', nombre: 'Moda Luna', categoria: 'Moda', local: '104', color: '#c2366b',
-    logo: logo('moda-luna'), whatsapp: '+506 8800 1104', web: 'https://es.wikipedia.org/wiki/Moda',
-    video: 'https://www.youtube.com/watch?v=eRsGyueVLvQ' },
-  { id: 'verde-vivero', nombre: 'Verde Vivero', categoria: 'Hogar y jardín', local: '105', color: '#3f8f2f',
-    logo: logo('verde-vivero'), whatsapp: '+506 8800 1105', web: 'https://es.wikipedia.org/wiki/Jardiner%C3%ADa',
-    video: 'https://www.youtube.com/watch?v=WhWc3b3KhnY' },
-  { id: 'tecno-centro', nombre: 'TecnoCentro', categoria: 'Tecnología', local: '106', color: '#1d5fa8',
-    logo: logo('tecno-centro'), whatsapp: '+506 8800 1106', web: 'https://es.wikipedia.org/wiki/Tecnolog%C3%ADa',
-    video: 'https://www.youtube.com/watch?v=R6MlUcmOul8' },
-  { id: 'lavanderia-cosmos', nombre: 'Lavandería Cosmos', categoria: 'Servicios', local: '107', color: '#0e8a9a',
-    logo: logo('lavanderia-cosmos'), whatsapp: '+506 8800 1107', web: 'https://es.wikipedia.org/wiki/Lavander%C3%ADa',
-    video: 'https://www.youtube.com/watch?v=Y-rmzh0PI3c' },
-  { id: 'agencia-327', nombre: 'Agencia 327', categoria: 'Servicios', local: '108', color: '#333a46',
-    logo: logo('agencia-327'), whatsapp: '+506 8800 1108', web: 'https://es.wikipedia.org/wiki/Seguridad',
-    video: 'https://www.youtube.com/watch?v=mN0zPOpADL4' },
-  { id: 'dulce-bosque', nombre: 'Dulce Bosque', categoria: 'Alimentos y bebidas', local: '109', color: '#d4732a',
-    logo: logo('dulce-bosque'), whatsapp: '+506 8800 1109', web: 'https://es.wikipedia.org/wiki/Reposter%C3%ADa',
-    video: 'https://www.youtube.com/watch?v=_cMxraX_5RE' },
-  { id: 'cafe-express', nombre: 'Coffee Run', categoria: 'Alimentos y bebidas', local: '110', color: '#a33a2c',
-    logo: logo('coffee-run'), whatsapp: '+506 8800 1110', web: 'https://es.wikipedia.org/wiki/Espresso',
-    video: 'https://www.youtube.com/watch?v=PVGeM40dABA' },
+  { id: 'cafe-aroma', nombre: 'Café Aroma', categoria: 'Alimentos y bebidas', piso: 1, color: '#7a4b2a',
+    logo: img('cafe-aroma'), whatsapp: '+506 8800 1101', web: 'https://es.wikipedia.org/wiki/Caf%C3%A9',
+    video: 'https://www.youtube.com/watch?v=jfKfPfyJRdk',
+    productos: prods('cafe-aroma', [['Café de altura 340 g', '₡4.500'], ['Taza artesanal', '₡6.000'], ['Chorreador de madera', '₡12.900']]) },
+  { id: 'tico-tours', nombre: 'Tico Tours', categoria: 'Turismo', piso: 1, color: '#1f7a5a',
+    logo: img('tico-tours'), whatsapp: '+506 8800 1102', web: 'https://es.wikipedia.org/wiki/Costa_Rica',
+    video: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+    productos: prods('tico-tours', [['Tour volcán Arenal', '₡45.000'], ['Canopy en Monteverde', '₡38.000'], ['Día de playa', '₡29.000']]) },
+  { id: 'moda-luna', nombre: 'Moda Luna', categoria: 'Moda', piso: 1, color: '#c2366b',
+    logo: img('moda-luna'), whatsapp: '+506 8800 1104', web: 'https://es.wikipedia.org/wiki/Moda',
+    video: 'https://www.youtube.com/watch?v=eRsGyueVLvQ',
+    productos: prods('moda-luna', [['Vestido de lino', '₡24.900'], ['Bolso tejido', '₡18.500'], ['Sandalias de cuero', '₡21.000']]) },
+  { id: 'dulce-bosque', nombre: 'Dulce Bosque', categoria: 'Alimentos y bebidas', piso: 1, color: '#d4732a',
+    logo: img('dulce-bosque'), whatsapp: '+506 8800 1109', web: 'https://es.wikipedia.org/wiki/Reposter%C3%ADa',
+    video: 'https://www.youtube.com/watch?v=_cMxraX_5RE',
+    productos: prods('dulce-bosque', [['Pastel de tres leches', '₡9.800'], ['Galletas de avena', '₡3.200'], ['Caja de alfajores', '₡5.500']]) },
+  { id: 'pixel-studio', nombre: 'Pixel Studio', categoria: 'Tecnología', piso: 2, color: '#5b3fd1',
+    logo: img('pixel-studio'), whatsapp: '+506 8800 1103', web: 'https://es.wikipedia.org/wiki/Animaci%C3%B3n',
+    video: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    productos: prods('pixel-studio', [['Logo animado', '₡60.000'], ['Video para redes', '₡85.000'], ['Ilustración digital', '₡40.000']]) },
+  { id: 'verde-vivero', nombre: 'Verde Vivero', categoria: 'Hogar y jardín', piso: 2, color: '#3f8f2f',
+    logo: img('verde-vivero'), whatsapp: '+506 8800 1105', web: 'https://es.wikipedia.org/wiki/Jardiner%C3%ADa',
+    video: 'https://www.youtube.com/watch?v=WhWc3b3KhnY',
+    productos: prods('verde-vivero', [['Orquídea en maceta', '₡14.000'], ['Kit de suculentas', '₡8.500'], ['Abono orgánico 5 kg', '₡4.200']]) },
+  { id: 'tecno-centro', nombre: 'TecnoCentro', categoria: 'Tecnología', piso: 2, color: '#1d5fa8',
+    logo: img('tecno-centro'), whatsapp: '+506 8800 1106', web: 'https://es.wikipedia.org/wiki/Tecnolog%C3%ADa',
+    video: 'https://www.youtube.com/watch?v=R6MlUcmOul8',
+    productos: prods('tecno-centro', [['Audífonos inalámbricos', '₡32.000'], ['Reloj inteligente', '₡54.900'], ['Cargador rápido', '₡9.900']]) },
+  { id: 'lavanderia-cosmos', nombre: 'Lavandería Cosmos', categoria: 'Servicios', piso: 3, color: '#0e8a9a',
+    logo: img('lavanderia-cosmos'), whatsapp: '+506 8800 1107', web: 'https://es.wikipedia.org/wiki/Lavander%C3%ADa',
+    video: 'https://www.youtube.com/watch?v=Y-rmzh0PI3c',
+    productos: prods('lavanderia-cosmos', [['Lavado y secado', '₡3.500'], ['Planchado por pieza', '₡800'], ['Edredón king', '₡7.000']]) },
+  { id: 'agencia-327', nombre: 'Agencia 327', categoria: 'Servicios', piso: 3, color: '#333a46',
+    logo: img('agencia-327'), whatsapp: '+506 8800 1108', web: 'https://es.wikipedia.org/wiki/Seguridad',
+    video: 'https://www.youtube.com/watch?v=mN0zPOpADL4',
+    productos: prods('agencia-327', [['Cámara de seguridad', '₡39.000'], ['Alarma para casa', '₡65.000'], ['Instalación', '₡25.000']]) },
+  { id: 'coffee-run', nombre: 'Coffee Run', categoria: 'Alimentos y bebidas', piso: 3, color: '#a33a2c',
+    logo: img('coffee-run'), whatsapp: '+506 8800 1110', web: 'https://es.wikipedia.org/wiki/Espresso',
+    video: 'https://www.youtube.com/watch?v=PVGeM40dABA',
+    productos: prods('coffee-run', [['Espresso doble', '₡1.800'], ['Capuchino', '₡2.400'], ['Termo de acero', '₡11.500']]) },
+  { id: 'artesanias-sarchi', nombre: 'Artesanías Sarchí', categoria: 'Artesanía', piso: 1, color: '#c8361f',
+    logo: img('artesanias-sarchi'), whatsapp: '+506 8800 1111', web: 'https://es.wikipedia.org/wiki/Sarch%C3%AD',
+    video: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+    productos: prods('artesanias-sarchi', [['Carreta en miniatura', '₡15.000'], ['Plato pintado a mano', '₡9.500'], ['Llavero de madera', '₡2.500']]) },
+  { id: 'bella-piel', nombre: 'Bella Piel', categoria: 'Salud y belleza', piso: 1, color: '#b0547a',
+    logo: img('bella-piel'), whatsapp: '+506 8800 1112', web: 'https://es.wikipedia.org/wiki/Cosm%C3%A9tica',
+    video: 'https://www.youtube.com/watch?v=eRsGyueVLvQ',
+    productos: prods('bella-piel', [['Crema hidratante', '₡8.900'], ['Jabón artesanal', '₡2.800'], ['Aceite de coco', '₡6.200']]) },
+  { id: 'patitas', nombre: 'Patitas', categoria: 'Mascotas', piso: 1, color: '#e0702a',
+    logo: img('patitas'), whatsapp: '+506 8800 1113', web: 'https://es.wikipedia.org/wiki/Mascota',
+    video: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    productos: prods('patitas', [['Cama para perro', '₡19.900'], ['Juguete de cuerda', '₡3.500'], ['Collar bordado', '₡6.800']]) },
+  { id: 'libreria-pura-vida', nombre: 'Librería Pura Vida', categoria: 'Educación', piso: 2, color: '#2f6f8f',
+    logo: img('libreria-pura-vida'), whatsapp: '+506 8800 1114', web: 'https://es.wikipedia.org/wiki/Librer%C3%ADa',
+    video: 'https://www.youtube.com/watch?v=WhWc3b3KhnY',
+    productos: prods('libreria-pura-vida', [['Cuaderno artesanal', '₡4.200'], ['Novela ilustrada', '₡12.500'], ['Set de acuarelas', '₡9.900']]) },
+  { id: 'gym-volcan', nombre: 'Volcán Fit', categoria: 'Deportes', piso: 2, color: '#d6453d',
+    logo: img('volcan-fit'), whatsapp: '+506 8800 1115', web: 'https://es.wikipedia.org/wiki/Deporte',
+    video: 'https://www.youtube.com/watch?v=Y-rmzh0PI3c',
+    productos: prods('volcan-fit', [['Mancuernas 5 kg', '₡18.000'], ['Tapete de yoga', '₡11.900'], ['Botella térmica', '₡7.500']]) },
+  { id: 'taller-del-arte', nombre: 'Taller del Arte', categoria: 'Arte y diseño', piso: 3, color: '#7a2f8f',
+    logo: img('taller-del-arte'), whatsapp: '+506 8800 1116', web: 'https://es.wikipedia.org/wiki/Arte',
+    video: 'https://www.youtube.com/watch?v=_cMxraX_5RE',
+    productos: prods('taller-del-arte', [['Cuadro al óleo', '₡75.000'], ['Clase de cerámica', '₡20.000'], ['Lámina enmarcada', '₡16.000']]) },
+  { id: 'casa-hogar', nombre: 'Casa & Hogar', categoria: 'Hogar y jardín', piso: 3, color: '#6b7f5e',
+    logo: img('casa-hogar'), whatsapp: '+506 8800 1117', web: 'https://es.wikipedia.org/wiki/Decoraci%C3%B3n',
+    video: 'https://www.youtube.com/watch?v=R6MlUcmOul8',
+    productos: prods('casa-hogar', [['Cojín bordado', '₡8.500'], ['Lámpara de bambú', '₡24.000'], ['Juego de vasos', '₡12.000']]) },
+  { id: 'sabores-ticos', nombre: 'Sabores Ticos', categoria: 'Alimentos y bebidas', piso: 3, color: '#b5643c',
+    logo: img('sabores-ticos'), whatsapp: '+506 8800 1118', web: 'https://es.wikipedia.org/wiki/Gastronom%C3%ADa_de_Costa_Rica',
+    video: 'https://www.youtube.com/watch?v=jfKfPfyJRdk',
+    productos: prods('sabores-ticos', [['Gallo pinto para llevar', '₡3.500'], ['Salsa Lizano casera', '₡2.900'], ['Tamal de cerdo', '₡2.200']]) },
 ];
+
+/** Completa campos que falten (datos viejos o importados). */
+export function normalizeStore(s) {
+  const productos = Array.from({ length: 3 }, (_, i) => ({ imagen: '', nombre: '', precio: '', ...((s.productos || [])[i] || {}) }));
+  return { categoria: '', piso: 1, color: '#22a07a', logo: '', whatsapp: '', web: '', video: '', ...s, productos };
+}
 
 /** Extrae el ID de cualquier formato de enlace de YouTube (watch, youtu.be, shorts, embed, live) o un ID suelto. */
 export function youtubeId(input) {
@@ -112,10 +185,10 @@ export async function readPublished() {
 /** Devuelve { list, source } */
 export async function loadStores() {
   const local = readLocal();
-  if (local) return { list: local, source: 'panel' };
+  if (local) return { list: local.map(normalizeStore), source: 'panel' };
   const pub = await readPublished();
-  if (pub) return { list: pub, source: 'publicado' };
-  return { list: structuredClone(DEMO_STORES), source: 'ejemplo' };
+  if (pub) return { list: pub.map(normalizeStore), source: 'publicado' };
+  return { list: structuredClone(DEMO_STORES).map(normalizeStore), source: 'ejemplo' };
 }
 
 export function initials(name) {
