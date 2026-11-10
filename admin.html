@@ -30,7 +30,7 @@
         <h1 id="h-list">Comercios <span id="count" class="count"></span></h1>
         <button id="btn-new" class="btn primary" type="button">+ Nuevo comercio</button>
       </div>
-      <p class="help">El orden de la lista es el orden en el pasillo: los impares van a la izquierda y los pares a la derecha.</p>
+      <p class="help">Cada comercio va en el piso que elijas. Dentro de un piso, el orden de esta lista decide qué local le toca.</p>
       <ol id="store-list" class="store-list"></ol>
 
       <div class="tools">
@@ -80,8 +80,13 @@
             <datalist id="cat-list"></datalist>
           </div>
           <div class="field small">
-            <label for="f-local">N.º de local</label>
-            <input id="f-local" name="local" type="text" placeholder="101" autocomplete="off">
+            <label for="f-piso">Piso</label>
+            <select id="f-piso" name="piso">
+              <option value="1">Piso 1</option>
+              <option value="2">Piso 2</option>
+              <option value="3">Piso 3</option>
+            </select>
+            <p class="msg" id="m-piso"></p>
           </div>
           <div class="field small">
             <label for="f-color">Color de la fachada</label>
@@ -108,11 +113,33 @@
           </div>
 
           <div class="field span2">
-            <label for="f-video">Video de YouTube <span class="hint">se reproduce en la vitrina, sin sonido hasta que el visitante lo active</span></label>
+            <label for="f-video">Video de YouTube <span class="hint">se reproduce al fondo del local, en bucle y sin controles</span></label>
             <input id="f-video" name="video" type="url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off">
             <p class="msg" id="m-video"></p>
             <div class="video-prev" id="video-prev"></div>
           </div>
+
+          <fieldset class="field span2 products">
+            <legend>Productos destacados <span class="hint">los 3 que se ven en la vitrina del local</span></legend>
+            <div class="prod-row">
+              <div class="prod-prev" id="pp-0"><span>1</span></div>
+              <input id="p0-imagen" data-prod="0" data-key="imagen" type="url" placeholder="Enlace a la foto del producto 1" autocomplete="off" aria-label="Foto del producto 1">
+              <input id="p0-nombre" data-prod="0" data-key="nombre" type="text" placeholder="Nombre" autocomplete="off" aria-label="Nombre del producto 1">
+              <input id="p0-precio" data-prod="0" data-key="precio" type="text" placeholder="Precio, ej. ₡4.500" autocomplete="off" aria-label="Precio del producto 1">
+            </div>
+            <div class="prod-row">
+              <div class="prod-prev" id="pp-1"><span>2</span></div>
+              <input id="p1-imagen" data-prod="1" data-key="imagen" type="url" placeholder="Enlace a la foto del producto 2" autocomplete="off" aria-label="Foto del producto 2">
+              <input id="p1-nombre" data-prod="1" data-key="nombre" type="text" placeholder="Nombre" autocomplete="off" aria-label="Nombre del producto 2">
+              <input id="p1-precio" data-prod="1" data-key="precio" type="text" placeholder="Precio, ej. ₡4.500" autocomplete="off" aria-label="Precio del producto 2">
+            </div>
+            <div class="prod-row">
+              <div class="prod-prev" id="pp-2"><span>3</span></div>
+              <input id="p2-imagen" data-prod="2" data-key="imagen" type="url" placeholder="Enlace a la foto del producto 3" autocomplete="off" aria-label="Foto del producto 3">
+              <input id="p2-nombre" data-prod="2" data-key="nombre" type="text" placeholder="Nombre" autocomplete="off" aria-label="Nombre del producto 3">
+              <input id="p2-precio" data-prod="2" data-key="precio" type="text" placeholder="Precio, ej. ₡4.500" autocomplete="off" aria-label="Precio del producto 3">
+            </div>
+          </fieldset>
         </div>
       </form>
 
