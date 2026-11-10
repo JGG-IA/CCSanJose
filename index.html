@@ -25,6 +25,11 @@
       <span class="brand-text"><strong>SAN JOSÉ</strong><small>Centro Comercial Virtual</small></span>
     </a>
     <nav class="hud-actions">
+      <div class="floors" role="group" aria-label="Ir a otro piso">
+        <button class="chip floor" type="button" data-floor="0" aria-pressed="true">Piso 1</button>
+        <button class="chip floor" type="button" data-floor="1" aria-pressed="false">2</button>
+        <button class="chip floor" type="button" data-floor="2" aria-pressed="false">3</button>
+      </div>
       <button id="btn-dir" class="chip" type="button">Directorio</button>
       <button id="btn-sound" class="chip" type="button" aria-pressed="false">Sonido: apagado</button>
     </nav>
@@ -64,22 +69,18 @@
     <p id="dir-empty" class="dir-sub" hidden>No hay tiendas en esta categoría.</p>
   </aside>
 
-  <!-- Pantalla de entrada -->
+  <!-- Llegada: el edificio visto desde la plaza -->
   <div id="intro" class="intro">
-    <div class="intro-inner">
-      <p class="intro-eyebrow">Bienvenido a</p>
-      <h1>SAN JOSÉ</h1>
-      <p class="intro-sub">Centro Comercial Virtual</p>
-      <p class="intro-copy">Camina por los pasillos, mira las vitrinas de cada emprendimiento y entra a su sitio web con un clic. Al fondo te espera el altar de San José.</p>
-      <button id="btn-enter" class="btn primary big" type="button">Entrar al centro comercial</button>
-      <ul class="intro-keys">
-        <li class="desk-only"><kbd>W A S D</kbd> o flechas para caminar</li>
-        <li class="desk-only"><kbd>Mouse</kbd> para mirar · <kbd>Clic</kbd> en una tienda abre su sitio</li>
-        <li class="touch-only">Joystick para caminar · arrastra para mirar · toca una tienda</li>
-      </ul>
-      <p id="data-source" class="intro-note"></p>
+    <div class="intro-card">
+      <p class="intro-eyebrow">Centro Comercial</p>
+      <h1>SAN JOSÉ <span>(virtual)</span></h1>
+      <p class="intro-copy">Tres pisos de emprendimientos alrededor de un gran patio central. Recorre las vitrinas, mira sus videos y entra a cada tienda con un clic.</p>
+      <button id="btn-enter" class="btn primary big" type="button">Ingresar</button>
+      <p class="intro-keys desk-only"><kbd>W A S D</kbd> caminar · <kbd>Mouse</kbd> mirar · <kbd>Clic</kbd> en una tienda abre su sitio · <kbd>1 2 3</kbd> cambiar de piso</p>
+      <p class="intro-keys touch-only">Joystick para caminar · arrastra para mirar · toca una tienda</p>
     </div>
   </div>
+  <div id="fade" class="fade" aria-hidden="true"></div>
 
   <noscript><p class="nojs">Este centro comercial necesita JavaScript activado.</p></noscript>
   <script type="module" src="js/mall.js"></script>
