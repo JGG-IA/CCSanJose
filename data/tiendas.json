@@ -3,110 +3,504 @@
     "id": "cafe-aroma",
     "nombre": "Café Aroma",
     "categoria": "Alimentos y bebidas",
-    "local": "101",
+    "piso": 1,
     "color": "#7a4b2a",
     "logo": "https://picsum.photos/seed/cafe-aroma/400/400",
     "whatsapp": "+506 8800 1101",
     "web": "https://es.wikipedia.org/wiki/Caf%C3%A9",
-    "video": "https://www.youtube.com/watch?v=jfKfPfyJRdk"
+    "video": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/cafe-aroma-p1/500/500",
+        "nombre": "Café de altura 340 g",
+        "precio": "₡4.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/cafe-aroma-p2/500/500",
+        "nombre": "Taza artesanal",
+        "precio": "₡6.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/cafe-aroma-p3/500/500",
+        "nombre": "Chorreador de madera",
+        "precio": "₡12.900"
+      }
+    ]
   },
   {
     "id": "tico-tours",
     "nombre": "Tico Tours",
     "categoria": "Turismo",
-    "local": "102",
+    "piso": 1,
     "color": "#1f7a5a",
     "logo": "https://picsum.photos/seed/tico-tours/400/400",
     "whatsapp": "+506 8800 1102",
     "web": "https://es.wikipedia.org/wiki/Costa_Rica",
-    "video": "https://www.youtube.com/watch?v=LXb3EKWsInQ"
-  },
-  {
-    "id": "pixel-studio",
-    "nombre": "Pixel Studio",
-    "categoria": "Tecnología",
-    "local": "103",
-    "color": "#5b3fd1",
-    "logo": "https://picsum.photos/seed/pixel-studio/400/400",
-    "whatsapp": "+506 8800 1103",
-    "web": "https://es.wikipedia.org/wiki/Animaci%C3%B3n",
-    "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+    "video": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/tico-tours-p1/500/500",
+        "nombre": "Tour volcán Arenal",
+        "precio": "₡45.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/tico-tours-p2/500/500",
+        "nombre": "Canopy en Monteverde",
+        "precio": "₡38.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/tico-tours-p3/500/500",
+        "nombre": "Día de playa",
+        "precio": "₡29.000"
+      }
+    ]
   },
   {
     "id": "moda-luna",
     "nombre": "Moda Luna",
     "categoria": "Moda",
-    "local": "104",
+    "piso": 1,
     "color": "#c2366b",
     "logo": "https://picsum.photos/seed/moda-luna/400/400",
     "whatsapp": "+506 8800 1104",
     "web": "https://es.wikipedia.org/wiki/Moda",
-    "video": "https://www.youtube.com/watch?v=eRsGyueVLvQ"
-  },
-  {
-    "id": "verde-vivero",
-    "nombre": "Verde Vivero",
-    "categoria": "Hogar y jardín",
-    "local": "105",
-    "color": "#3f8f2f",
-    "logo": "https://picsum.photos/seed/verde-vivero/400/400",
-    "whatsapp": "+506 8800 1105",
-    "web": "https://es.wikipedia.org/wiki/Jardiner%C3%ADa",
-    "video": "https://www.youtube.com/watch?v=WhWc3b3KhnY"
-  },
-  {
-    "id": "tecno-centro",
-    "nombre": "TecnoCentro",
-    "categoria": "Tecnología",
-    "local": "106",
-    "color": "#1d5fa8",
-    "logo": "https://picsum.photos/seed/tecno-centro/400/400",
-    "whatsapp": "+506 8800 1106",
-    "web": "https://es.wikipedia.org/wiki/Tecnolog%C3%ADa",
-    "video": "https://www.youtube.com/watch?v=R6MlUcmOul8"
-  },
-  {
-    "id": "lavanderia-cosmos",
-    "nombre": "Lavandería Cosmos",
-    "categoria": "Servicios",
-    "local": "107",
-    "color": "#0e8a9a",
-    "logo": "https://picsum.photos/seed/lavanderia-cosmos/400/400",
-    "whatsapp": "+506 8800 1107",
-    "web": "https://es.wikipedia.org/wiki/Lavander%C3%ADa",
-    "video": "https://www.youtube.com/watch?v=Y-rmzh0PI3c"
-  },
-  {
-    "id": "agencia-327",
-    "nombre": "Agencia 327",
-    "categoria": "Servicios",
-    "local": "108",
-    "color": "#333a46",
-    "logo": "https://picsum.photos/seed/agencia-327/400/400",
-    "whatsapp": "+506 8800 1108",
-    "web": "https://es.wikipedia.org/wiki/Seguridad",
-    "video": "https://www.youtube.com/watch?v=mN0zPOpADL4"
+    "video": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/moda-luna-p1/500/500",
+        "nombre": "Vestido de lino",
+        "precio": "₡24.900"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/moda-luna-p2/500/500",
+        "nombre": "Bolso tejido",
+        "precio": "₡18.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/moda-luna-p3/500/500",
+        "nombre": "Sandalias de cuero",
+        "precio": "₡21.000"
+      }
+    ]
   },
   {
     "id": "dulce-bosque",
     "nombre": "Dulce Bosque",
     "categoria": "Alimentos y bebidas",
-    "local": "109",
+    "piso": 1,
     "color": "#d4732a",
     "logo": "https://picsum.photos/seed/dulce-bosque/400/400",
     "whatsapp": "+506 8800 1109",
     "web": "https://es.wikipedia.org/wiki/Reposter%C3%ADa",
-    "video": "https://www.youtube.com/watch?v=_cMxraX_5RE"
+    "video": "https://www.youtube.com/watch?v=_cMxraX_5RE",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/dulce-bosque-p1/500/500",
+        "nombre": "Pastel de tres leches",
+        "precio": "₡9.800"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/dulce-bosque-p2/500/500",
+        "nombre": "Galletas de avena",
+        "precio": "₡3.200"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/dulce-bosque-p3/500/500",
+        "nombre": "Caja de alfajores",
+        "precio": "₡5.500"
+      }
+    ]
   },
   {
-    "id": "cafe-express",
+    "id": "pixel-studio",
+    "nombre": "Pixel Studio",
+    "categoria": "Tecnología",
+    "piso": 2,
+    "color": "#5b3fd1",
+    "logo": "https://picsum.photos/seed/pixel-studio/400/400",
+    "whatsapp": "+506 8800 1103",
+    "web": "https://es.wikipedia.org/wiki/Animaci%C3%B3n",
+    "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/pixel-studio-p1/500/500",
+        "nombre": "Logo animado",
+        "precio": "₡60.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/pixel-studio-p2/500/500",
+        "nombre": "Video para redes",
+        "precio": "₡85.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/pixel-studio-p3/500/500",
+        "nombre": "Ilustración digital",
+        "precio": "₡40.000"
+      }
+    ]
+  },
+  {
+    "id": "verde-vivero",
+    "nombre": "Verde Vivero",
+    "categoria": "Hogar y jardín",
+    "piso": 2,
+    "color": "#3f8f2f",
+    "logo": "https://picsum.photos/seed/verde-vivero/400/400",
+    "whatsapp": "+506 8800 1105",
+    "web": "https://es.wikipedia.org/wiki/Jardiner%C3%ADa",
+    "video": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/verde-vivero-p1/500/500",
+        "nombre": "Orquídea en maceta",
+        "precio": "₡14.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/verde-vivero-p2/500/500",
+        "nombre": "Kit de suculentas",
+        "precio": "₡8.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/verde-vivero-p3/500/500",
+        "nombre": "Abono orgánico 5 kg",
+        "precio": "₡4.200"
+      }
+    ]
+  },
+  {
+    "id": "tecno-centro",
+    "nombre": "TecnoCentro",
+    "categoria": "Tecnología",
+    "piso": 2,
+    "color": "#1d5fa8",
+    "logo": "https://picsum.photos/seed/tecno-centro/400/400",
+    "whatsapp": "+506 8800 1106",
+    "web": "https://es.wikipedia.org/wiki/Tecnolog%C3%ADa",
+    "video": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/tecno-centro-p1/500/500",
+        "nombre": "Audífonos inalámbricos",
+        "precio": "₡32.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/tecno-centro-p2/500/500",
+        "nombre": "Reloj inteligente",
+        "precio": "₡54.900"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/tecno-centro-p3/500/500",
+        "nombre": "Cargador rápido",
+        "precio": "₡9.900"
+      }
+    ]
+  },
+  {
+    "id": "lavanderia-cosmos",
+    "nombre": "Lavandería Cosmos",
+    "categoria": "Servicios",
+    "piso": 3,
+    "color": "#0e8a9a",
+    "logo": "https://picsum.photos/seed/lavanderia-cosmos/400/400",
+    "whatsapp": "+506 8800 1107",
+    "web": "https://es.wikipedia.org/wiki/Lavander%C3%ADa",
+    "video": "https://www.youtube.com/watch?v=Y-rmzh0PI3c",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/lavanderia-cosmos-p1/500/500",
+        "nombre": "Lavado y secado",
+        "precio": "₡3.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/lavanderia-cosmos-p2/500/500",
+        "nombre": "Planchado por pieza",
+        "precio": "₡800"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/lavanderia-cosmos-p3/500/500",
+        "nombre": "Edredón king",
+        "precio": "₡7.000"
+      }
+    ]
+  },
+  {
+    "id": "agencia-327",
+    "nombre": "Agencia 327",
+    "categoria": "Servicios",
+    "piso": 3,
+    "color": "#333a46",
+    "logo": "https://picsum.photos/seed/agencia-327/400/400",
+    "whatsapp": "+506 8800 1108",
+    "web": "https://es.wikipedia.org/wiki/Seguridad",
+    "video": "https://www.youtube.com/watch?v=mN0zPOpADL4",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/agencia-327-p1/500/500",
+        "nombre": "Cámara de seguridad",
+        "precio": "₡39.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/agencia-327-p2/500/500",
+        "nombre": "Alarma para casa",
+        "precio": "₡65.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/agencia-327-p3/500/500",
+        "nombre": "Instalación",
+        "precio": "₡25.000"
+      }
+    ]
+  },
+  {
+    "id": "coffee-run",
     "nombre": "Coffee Run",
     "categoria": "Alimentos y bebidas",
-    "local": "110",
+    "piso": 3,
     "color": "#a33a2c",
     "logo": "https://picsum.photos/seed/coffee-run/400/400",
     "whatsapp": "+506 8800 1110",
     "web": "https://es.wikipedia.org/wiki/Espresso",
-    "video": "https://www.youtube.com/watch?v=PVGeM40dABA"
+    "video": "https://www.youtube.com/watch?v=PVGeM40dABA",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/coffee-run-p1/500/500",
+        "nombre": "Espresso doble",
+        "precio": "₡1.800"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/coffee-run-p2/500/500",
+        "nombre": "Capuchino",
+        "precio": "₡2.400"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/coffee-run-p3/500/500",
+        "nombre": "Termo de acero",
+        "precio": "₡11.500"
+      }
+    ]
+  },
+  {
+    "id": "artesanias-sarchi",
+    "nombre": "Artesanías Sarchí",
+    "categoria": "Artesanía",
+    "piso": 1,
+    "color": "#c8361f",
+    "logo": "https://picsum.photos/seed/artesanias-sarchi/400/400",
+    "whatsapp": "+506 8800 1111",
+    "web": "https://es.wikipedia.org/wiki/Sarch%C3%AD",
+    "video": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/artesanias-sarchi-p1/500/500",
+        "nombre": "Carreta en miniatura",
+        "precio": "₡15.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/artesanias-sarchi-p2/500/500",
+        "nombre": "Plato pintado a mano",
+        "precio": "₡9.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/artesanias-sarchi-p3/500/500",
+        "nombre": "Llavero de madera",
+        "precio": "₡2.500"
+      }
+    ]
+  },
+  {
+    "id": "bella-piel",
+    "nombre": "Bella Piel",
+    "categoria": "Salud y belleza",
+    "piso": 1,
+    "color": "#b0547a",
+    "logo": "https://picsum.photos/seed/bella-piel/400/400",
+    "whatsapp": "+506 8800 1112",
+    "web": "https://es.wikipedia.org/wiki/Cosm%C3%A9tica",
+    "video": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/bella-piel-p1/500/500",
+        "nombre": "Crema hidratante",
+        "precio": "₡8.900"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/bella-piel-p2/500/500",
+        "nombre": "Jabón artesanal",
+        "precio": "₡2.800"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/bella-piel-p3/500/500",
+        "nombre": "Aceite de coco",
+        "precio": "₡6.200"
+      }
+    ]
+  },
+  {
+    "id": "patitas",
+    "nombre": "Patitas",
+    "categoria": "Mascotas",
+    "piso": 1,
+    "color": "#e0702a",
+    "logo": "https://picsum.photos/seed/patitas/400/400",
+    "whatsapp": "+506 8800 1113",
+    "web": "https://es.wikipedia.org/wiki/Mascota",
+    "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/patitas-p1/500/500",
+        "nombre": "Cama para perro",
+        "precio": "₡19.900"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/patitas-p2/500/500",
+        "nombre": "Juguete de cuerda",
+        "precio": "₡3.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/patitas-p3/500/500",
+        "nombre": "Collar bordado",
+        "precio": "₡6.800"
+      }
+    ]
+  },
+  {
+    "id": "libreria-pura-vida",
+    "nombre": "Librería Pura Vida",
+    "categoria": "Educación",
+    "piso": 2,
+    "color": "#2f6f8f",
+    "logo": "https://picsum.photos/seed/libreria-pura-vida/400/400",
+    "whatsapp": "+506 8800 1114",
+    "web": "https://es.wikipedia.org/wiki/Librer%C3%ADa",
+    "video": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/libreria-pura-vida-p1/500/500",
+        "nombre": "Cuaderno artesanal",
+        "precio": "₡4.200"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/libreria-pura-vida-p2/500/500",
+        "nombre": "Novela ilustrada",
+        "precio": "₡12.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/libreria-pura-vida-p3/500/500",
+        "nombre": "Set de acuarelas",
+        "precio": "₡9.900"
+      }
+    ]
+  },
+  {
+    "id": "gym-volcan",
+    "nombre": "Volcán Fit",
+    "categoria": "Deportes",
+    "piso": 2,
+    "color": "#d6453d",
+    "logo": "https://picsum.photos/seed/volcan-fit/400/400",
+    "whatsapp": "+506 8800 1115",
+    "web": "https://es.wikipedia.org/wiki/Deporte",
+    "video": "https://www.youtube.com/watch?v=Y-rmzh0PI3c",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/volcan-fit-p1/500/500",
+        "nombre": "Mancuernas 5 kg",
+        "precio": "₡18.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/volcan-fit-p2/500/500",
+        "nombre": "Tapete de yoga",
+        "precio": "₡11.900"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/volcan-fit-p3/500/500",
+        "nombre": "Botella térmica",
+        "precio": "₡7.500"
+      }
+    ]
+  },
+  {
+    "id": "taller-del-arte",
+    "nombre": "Taller del Arte",
+    "categoria": "Arte y diseño",
+    "piso": 3,
+    "color": "#7a2f8f",
+    "logo": "https://picsum.photos/seed/taller-del-arte/400/400",
+    "whatsapp": "+506 8800 1116",
+    "web": "https://es.wikipedia.org/wiki/Arte",
+    "video": "https://www.youtube.com/watch?v=_cMxraX_5RE",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/taller-del-arte-p1/500/500",
+        "nombre": "Cuadro al óleo",
+        "precio": "₡75.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/taller-del-arte-p2/500/500",
+        "nombre": "Clase de cerámica",
+        "precio": "₡20.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/taller-del-arte-p3/500/500",
+        "nombre": "Lámina enmarcada",
+        "precio": "₡16.000"
+      }
+    ]
+  },
+  {
+    "id": "casa-hogar",
+    "nombre": "Casa & Hogar",
+    "categoria": "Hogar y jardín",
+    "piso": 3,
+    "color": "#6b7f5e",
+    "logo": "https://picsum.photos/seed/casa-hogar/400/400",
+    "whatsapp": "+506 8800 1117",
+    "web": "https://es.wikipedia.org/wiki/Decoraci%C3%B3n",
+    "video": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/casa-hogar-p1/500/500",
+        "nombre": "Cojín bordado",
+        "precio": "₡8.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/casa-hogar-p2/500/500",
+        "nombre": "Lámpara de bambú",
+        "precio": "₡24.000"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/casa-hogar-p3/500/500",
+        "nombre": "Juego de vasos",
+        "precio": "₡12.000"
+      }
+    ]
+  },
+  {
+    "id": "sabores-ticos",
+    "nombre": "Sabores Ticos",
+    "categoria": "Alimentos y bebidas",
+    "piso": 3,
+    "color": "#b5643c",
+    "logo": "https://picsum.photos/seed/sabores-ticos/400/400",
+    "whatsapp": "+506 8800 1118",
+    "web": "https://es.wikipedia.org/wiki/Gastronom%C3%ADa_de_Costa_Rica",
+    "video": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+    "productos": [
+      {
+        "imagen": "https://picsum.photos/seed/sabores-ticos-p1/500/500",
+        "nombre": "Gallo pinto para llevar",
+        "precio": "₡3.500"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/sabores-ticos-p2/500/500",
+        "nombre": "Salsa Lizano casera",
+        "precio": "₡2.900"
+      },
+      {
+        "imagen": "https://picsum.photos/seed/sabores-ticos-p3/500/500",
+        "nombre": "Tamal de cerdo",
+        "precio": "₡2.200"
+      }
+    ]
   }
 ]
