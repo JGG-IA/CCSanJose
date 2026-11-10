@@ -1,12 +1,12 @@
 import {
-  loadStores, saveLocal, CATEGORIAS, clearLocal, readPublished, DEMO_STORES,
+  loadStores, saveLocal, CATEGORIAS, assignSlots, normalizeStore, clearLocal, readPublished, DEMO_STORES,
   youtubeId, embedUrl, waDigits, normalizeUrl, initials,
 } from './data.js';
 
 const $ = (id) => document.getElementById(id);
 const listEl = $('store-list');
 const form = $('form');
-const fields = ['nombre', 'categoria', 'local', 'color', 'logo', 'whatsapp', 'web', 'video'];
+const fields = ['nombre', 'categoria', 'piso', 'color', 'logo', 'whatsapp', 'web', 'video'];
 
 let stores = [];
 let current = 0;
@@ -27,11 +27,6 @@ function newId(name) {
   return id;
 }
 
-function nextLocal() {
-  const nums = stores.map((s) => parseInt(s.local, 10)).filter(Number.isFinite);
-  return String(nums.length ? Math.max(...nums) + 1 : 101);
-}
-
 /* ---------- Lista ---------- */
 function renderCategories() {
   const all = new Set([...CATEGORIAS, ...stores.map((s) => (s.categoria || '').trim()).filter(Boolean)]);
@@ -41,6 +36,7 @@ function renderCategories() {
 
 function renderList() {
   renderCategories();
+  const places = assignSlots(stores);
   $('count').textContent = `(${stores.length})`;
   listEl.innerHTML = '';
   stores.forEach((s, i) => {
@@ -59,7 +55,7 @@ function renderList() {
     li.querySelector('b').textContent = s.nombre || 'Sin nombre';
     const sub = li.querySelector('.info span');
     if (problems.length) { sub.textContent = `Falta: ${problems.join(', ')}`; sub.classList.add('warn'); }
-    else sub.textContent = `${s.categoria || 'Sin categoría'} · Local ${s.local || '—'}`;
+    else sub.textContent = `${s.categoria || 'Sin categoría'} · Piso ${places[i].piso} · Local ${places[i].local}`;
     if (s.logo) {
       const img = new Image(); img.alt = ''; img.referrerPolicy = 'no-referrer';
       img.onload = () => li.querySelector('.thumb').appendChild(img);
@@ -109,15 +105,22 @@ function select(i) {
 function fillForm() {
   const s = stores[current];
   if (!s) return;
-  for (const f of fields) $(`f-${f}`).value = s[f] ?? (f === 'color' ? '#22a07a' : '');
+  for (const f of fields) $(`f-${f}`).value = s[f] ?? (f === 'color' ? '#22a07a' : f === 'piso' ? '1' : '');
+  for (let j = 0; j < 3; j++) for (const k of ['imagen', 'nombre', 'precio']) $(`p${j}-${k}`).value = s.productos?.[j]?.[k] || '';
   lastVideoId = null;
   refreshPreviews(true);
 }
 
 form.addEventListener('input', (e) => {
   const s = stores[current];
-  if (!s || !e.target.name) return;
-  s[e.target.name] = e.target.value.trim();
+  if (!s) return;
+  if (e.target.dataset.prod !== undefined) {
+    const j = Number(e.target.dataset.prod);
+    s.productos = s.productos || [{}, {}, {}];
+    s.productos[j] = { ...(s.productos[j] || {}), [e.target.dataset.key]: e.target.value.trim() };
+  } else if (e.target.name) {
+    s[e.target.name] = e.target.name === 'piso' ? Number(e.target.value) : e.target.value.trim();
+  } else return;
   persist();
   refreshPreviews(e.target.name === 'video');
   renderListRow();
@@ -188,8 +191,23 @@ function refreshPreviews(videoChanged) {
     img.src = s.logo;
   }
   sign.querySelector('.s-name').textContent = s.nombre || 'Nombre del comercio';
-  sign.querySelector('.s-meta').textContent = [s.categoria, s.local && `Local ${s.local}`].filter(Boolean).join(' · ');
+  const place = assignSlots(stores)[current];
+  sign.querySelector('.s-meta').textContent = [s.categoria, place.local && `Piso ${place.piso} · Local ${place.local}`].filter(Boolean).join(' · ');
   sign.querySelector('.s-wa').textContent = s.whatsapp || '';
+  refreshPlace();
+}
+
+function refreshPlace() {
+  const s = stores[current]; if (!s) return;
+  const a = assignSlots(stores)[current];
+  setMsg('m-piso', a.lleno ? ['bad', 'Los 3 pisos están llenos (39 locales).']
+    : a.movido ? ['bad', `El piso ${s.piso} está lleno: quedó en el piso ${a.piso}, local ${a.local}.`]
+    : ['good', `Local ${a.local}, ${a.lado === 'fondo' ? 'al fondo' : a.lado === 'izquierda' ? 'lado izquierdo' : 'lado derecho'}.`]);
+  for (let j = 0; j < 3; j++) {
+    const box = $(`pp-${j}`), src = s.productos?.[j]?.imagen;
+    box.innerHTML = `<span>${j + 1}</span>`;
+    if (src) { const im = new Image(); im.alt = ''; im.referrerPolicy = 'no-referrer'; im.onload = () => box.appendChild(im); im.src = src; }
+  }
 }
 
 function setMsg(id, [cls, text]) {
@@ -200,8 +218,9 @@ function setMsg(id, [cls, text]) {
 $('btn-new').addEventListener('click', () => {
   const palette = ['#22a07a', '#1d5fa8', '#c2366b', '#d4732a', '#5b3fd1', '#3f8f2f', '#0e8a9a', '#a33a2c'];
   const s = {
-    id: newId('nuevo-comercio'), nombre: 'Nuevo comercio', categoria: '', local: nextLocal(),
+    id: newId('nuevo-comercio'), nombre: 'Nuevo comercio', categoria: '', piso: 1,
     color: palette[stores.length % palette.length], logo: '', whatsapp: '', web: '', video: '',
+    productos: [{ imagen: '', nombre: '', precio: '' }, { imagen: '', nombre: '', precio: '' }, { imagen: '', nombre: '', precio: '' }],
   };
   stores.push(s);
   persist('Comercio creado');
@@ -240,7 +259,7 @@ $('file-import').addEventListener('change', async (e) => {
   try {
     const list = JSON.parse(await file.text());
     if (!Array.isArray(list)) throw new Error();
-    stores = list.map((s) => ({ ...s, id: s.id || newId(s.nombre) }));
+    stores = list.map((s) => normalizeStore({ ...s, id: s.id || newId(s.nombre) }));
     persist('Archivo importado'); select(0);
     toolMsg(`Importados ${stores.length} comercios.`);
   } catch { toolMsg('Ese archivo no es una lista de comercios válida (tiendas.json).', true); }
@@ -249,13 +268,13 @@ $('file-import').addEventListener('change', async (e) => {
 $('btn-published').addEventListener('click', async () => {
   const pub = await readPublished();
   if (!pub) { toolMsg('No encontré data/tiendas.json en el sitio.', true); return; }
-  stores = pub; clearLocal(); persist('Cargado lo publicado'); select(0);
+  stores = pub.map(normalizeStore); clearLocal(); persist('Cargado lo publicado'); select(0);
   toolMsg(`Cargados ${pub.length} comercios desde data/tiendas.json.`);
 });
 
 $('btn-demo').addEventListener('click', () => {
-  stores = structuredClone(DEMO_STORES); persist('Ejemplos restaurados'); select(0);
-  toolMsg('Se restauraron los 10 comercios de ejemplo.');
+  stores = structuredClone(DEMO_STORES).map(normalizeStore); persist('Ejemplos restaurados'); select(0);
+  toolMsg(`Se restauraron los ${stores.length} comercios de ejemplo.`);
 });
 
 const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
