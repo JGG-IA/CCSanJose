@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#163a33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>SAN JOSÉ Centro Comercial Virtual</title>
+<meta name="description" content="Recorre en 3D los pasillos de SAN JOSÉ, el centro comercial virtual de emprendimientos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/mall.css">
+<script type="importmap">
+  { "imports": { "three": "./vendor/three.module.js", "three/css3d": "./vendor/CSS3DRenderer.js" } }
+</script>
+</head>
+<body>
+  <!-- Capa HTML en 3D (videos y letreros) debajo del lienzo WebGL -->
+  <div id="css-layer" aria-hidden="true"></div>
+  <div id="gl-layer"></div>
+
+  <!-- HUD -->
+  <header class="hud-top">
+    <a class="brand" href="./" aria-label="SAN JOSÉ Centro Comercial Virtual">
+      <span class="brand-mark">SJ</span>
+      <span class="brand-text"><strong>SAN JOSÉ</strong><small>Centro Comercial Virtual</small></span>
+    </a>
+    <nav class="hud-actions">
+      <div class="floors" role="group" aria-label="Ir a otro piso">
+        <button class="chip floor" type="button" data-floor="0" aria-pressed="true">Piso 1</button>
+        <button class="chip floor" type="button" data-floor="1" aria-pressed="false">2</button>
+        <button class="chip floor" type="button" data-floor="2" aria-pressed="false">3</button>
+      </div>
+      <button id="btn-dir" class="chip" type="button">Directorio</button>
+      <button id="btn-sound" class="chip" type="button" aria-pressed="false">Sonido<span class="long">: apagado</span></button>
+    </nav>
+  </header>
+
+  <div id="crosshair" aria-hidden="true"></div>
+
+  <!-- Tarjeta de la tienda que estás mirando -->
+  <section id="store-card" class="store-card" hidden aria-live="polite">
+    <div id="card-logo-box" class="card-logo"><span></span><img id="card-logo" alt=""></div>
+    <div class="card-body">
+      <p class="card-eyebrow"><span id="card-cat"></span> · Local <span id="card-local"></span></p>
+      <h2 id="card-name"></h2>
+      <p class="card-wa">WhatsApp <span id="card-wa-num"></span></p>
+    </div>
+    <div class="card-actions">
+      <a id="card-web" class="btn primary" target="_blank" rel="noopener">Visitar sitio web</a>
+      <a id="card-wa" class="btn wa" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+    <p class="card-keys desk-only"><kbd>Clic</kbd> sitio web · <kbd>E</kbd> WhatsApp · <kbd>M</kbd> sonido</p>
+  </section>
+
+  <p id="hint" class="hint desk-only"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> caminar · <kbd>Shift</kbd> correr · mouse para mirar · <kbd>Esc</kbd> soltar el mouse</p>
+
+  <!-- Controles táctiles -->
+  <div id="joystick" class="joystick touch-only" aria-hidden="true"><div class="knob"></div></div>
+
+  <!-- Directorio -->
+  <aside id="directory" class="directory" hidden>
+    <div class="dir-head">
+      <h2>Directorio</h2>
+      <button id="dir-close" class="icon-btn" type="button" aria-label="Cerrar directorio">×</button>
+    </div>
+    <p class="dir-sub">Elige una categoría y toca una tienda para ir caminando hasta ella.</p>
+    <div id="dir-filters" class="dir-filters" role="group" aria-label="Filtrar por categoría"></div>
+    <ul id="dir-list"></ul>
+    <p id="dir-empty" class="dir-sub" hidden>No hay tiendas en esta categoría.</p>
+  </aside>
+
+  <!-- Llegada: el edificio visto desde la plaza -->
+  <div id="intro" class="intro">
+    <div class="intro-card">
+      <p class="intro-eyebrow">Centro Comercial</p>
+      <h1>SAN JOSÉ <span>(virtual)</span></h1>
+      <p class="intro-copy">Tres pisos de emprendimientos alrededor de un gran patio central. Recorre las vitrinas, mira sus videos y entra a cada tienda con un clic.</p>
+      <button id="btn-enter" class="btn primary big" type="button">Ingresar</button>
+      <p class="intro-keys desk-only"><kbd>W A S D</kbd> caminar · <kbd>Mouse</kbd> mirar · <kbd>Clic</kbd> en una tienda abre su sitio · <kbd>1 2 3</kbd> cambiar de piso</p>
+      <p class="intro-keys touch-only">Joystick para caminar · desliza para mirar · toca una tienda para ver sus botones</p>
+    </div>
+  </div>
+  <div id="fade" class="fade" aria-hidden="true"></div>
+
+  <noscript><p class="nojs">Este centro comercial necesita JavaScript activado.</p></noscript>
+  <script type="module" src="js/mall.js"></script>
+</body>
+</html>
